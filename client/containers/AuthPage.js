@@ -32,9 +32,6 @@ class AuthPage extends React.Component {
     componentDidMount() {
         // If you want to do anything when this element first renders, do it here
         // See lifecycle methods: https://facebook.github.io/react/docs/react-component.html
-        
-        var { loginActions } = this.props;
-        loginActions.getLogin();
     }
 
     render() {
@@ -48,12 +45,6 @@ class AuthPage extends React.Component {
                     <LoginForm loginFunction={loginActions.login} />
                 </div>
                 Hello World!
-                
-                { user.isLoggedIn 
-                    ? <div> User is logged in </div> 
-                    : <div> User is not logged in </div>
-                }    
-		
             </div>
         );
     }
