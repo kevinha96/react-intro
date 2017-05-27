@@ -40,6 +40,7 @@ class LoginForm extends React.Component {
         // This is where you place your HTML. Inside of here goes components and other HTML elements
         return (
             <form onSubmit={this.submitForm}>
+                LoginForm_placeholder
             </form>
         );
     }
