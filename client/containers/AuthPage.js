@@ -40,10 +40,11 @@ class AuthPage extends React.Component {
     //currently only checking to see if I can get value to pass from LoginForm
 
     handleNewUser = (email) => {
-       //if (email != "") {
+       if (email != "") {
           //user.email = email;
-          alert('new email' + email);
-       //}
+          //alert('new email' + email);
+          loginActions.loginSuccessful(email, true); 
+       }
     }
 
     render() {
