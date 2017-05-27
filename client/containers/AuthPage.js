@@ -36,6 +36,16 @@ class AuthPage extends React.Component {
         loginActions.getLogin();
     }
 
+    //handle user submission
+    //currently only checking to see if I can get value to pass from LoginForm
+
+    handleNewUser = (email) => {
+       //if (email != "") {
+          //user.email = email;
+          alert('new email' + email);
+       //}
+    }
+
     render() {
         // This is where you place your HTML. Inside of here goes components and other HTML elements
 
@@ -44,7 +54,7 @@ class AuthPage extends React.Component {
         return (
             <div className="auth">
                 <div className="login">
-                    <LoginForm loginFunction={loginActions.login} />
+                    <LoginForm loginFunction={loginActions.login} handleNewUser={this.handleNewUser} />
                 </div>
                 Hello World!
 
