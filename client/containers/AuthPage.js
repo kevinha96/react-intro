@@ -43,7 +43,8 @@ class AuthPage extends React.Component {
        if (email != "") {
           //user.email = email;
           //alert('new email' + email);
-          loginActions.loginSuccessful(email, true); 
+         var { loginActions } = this.props; 
+         loginActions.login('debugging'); 
        }
     }
 
