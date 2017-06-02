@@ -37,13 +37,17 @@ module.exports = {
     login: function login(data) {
         // Dispatch tells Redux to send to store
         return dispatch => {
+            alert('data starts off as: ' + data);
             return fetch(API.LOGIN, API.POST_CONFIG(data))
             .then(Helpers.checkStatus)
             .then(Helpers.parseJSON)
             .then((json) => {
+                alert('code gets to dispatch');
                 return dispatch(loginSuccessful(json.email, true));
             })
             .catch((error) => {
+                alert('code does not get to dispatch, data: ' + data);
+                alert('json.email: ' + json.email);
                 return dispatch(loginSuccessful('', false));
             });
         }

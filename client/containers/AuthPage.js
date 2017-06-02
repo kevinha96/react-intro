@@ -25,7 +25,9 @@ class AuthPage extends React.Component {
         super(props);
 
         this.state = {
-
+            isLoggedIn: props.user.isLoggedIn,
+            isFacebookFetching: props.user.isFacebookFetching,
+            email: props.user.email,
         }
     }
 
@@ -39,12 +41,12 @@ class AuthPage extends React.Component {
     //handle user submission
     //currently only checking to see if I can get value to pass from LoginForm
 
-    handleNewUser = (email) => {
-       if (email != "") {
+    handleNewUser = (data) => {
+       if (data != "") {
           //user.email = email;
           //alert('new email' + email);
-         var { loginActions } = this.props; 
-         loginActions.login({email}); 
+         //var { loginActions } = this.props;
+         this.props.loginActions.login(data); 
        }
     }
 
