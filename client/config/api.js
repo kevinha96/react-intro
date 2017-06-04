@@ -12,6 +12,7 @@ module.exports = {
     PRODUCTION_SITE: PRODUCTION_SITE,
     // URLs
     LOGIN: BASE_URL + 'login/',
+    SIGNUP: BASE_URL + 'signup/',
     GET_CONFIG: {
         method: 'GET',
         credentials: 'include',

@@ -19,6 +19,9 @@ import SignUpForm from '../components/SignUpForm';
 // LoginActions
 import LoginActions from '../actions/LoginActions';
 
+//SignUpActions
+import SignUpActions from '../actions/SignUpActions';
+
 // Stylesheets .scss is like .css but it has built in scoping
 import '../stylesheets/containers/AuthPage.scss';
 
@@ -40,7 +43,7 @@ class AuthPage extends React.Component {
     componentDidMount() {
         // If you want to do anything when this element first renders, do it here
         // See lifecycle methods: https://facebook.github.io/react/docs/react-component.html
-        var { loginActions } = this.props;
+        var { loginActions, signUpActions } = this.props;
         loginActions.getLogin();
     }
 
@@ -55,7 +58,7 @@ class AuthPage extends React.Component {
         // This is where you place your HTML. Inside of here goes components and other HTML elements
 
         // this.props is a dictionary, so var { loginActions } is the same thing as var loginActions = this.props['loginActions'];
-        var { user, loginActions } = this.props;
+        var { user, loginActions, signUpActions } = this.props;
         return (
             <div className="auth">
                 <div className="login">
@@ -74,7 +77,7 @@ class AuthPage extends React.Component {
                     </button>
 
                     { this.state.isSigningUp && 
-                        <SignUpForm />
+                        <SignUpForm signUpFunction={signUpActions.signup} />
                     }
 
                 </div>
@@ -96,6 +99,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         loginActions: bindActionCreators(LoginActions, dispatch),
+        signUpActions: bindActionCreators(SignUpActions, dispatch),
     }
 }
 
