@@ -22,7 +22,13 @@ class LoginForm extends React.Component {
     submitForm = (event) => {
         // ES6 function. Sets variable submitForm as a function with event as the input. Autobinds to this (important).
         // Run this when the form gets submitted, prevent the default action
-        this.props.handleNewUser(this.state.email);
+        //this.props.handleNewUser(this.state.email);
+        var loginInfo = {
+            email: this.state.email,
+            password: "yo",
+        }
+
+        this.props.loginFunction(loginInfo);
         //event.preventDefault();
     }
 

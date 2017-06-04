@@ -15,7 +15,6 @@ import { applyRouterMiddleware, Router, Route, IndexRoute, Redirect} from 'react
 
 // Containers
 import AuthPage from '../containers/AuthPage.js'
-//import LoginPage from '../containers/LoginPage.js'
 
 class Routes extends React.Component {
 

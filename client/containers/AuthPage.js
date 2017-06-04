@@ -13,6 +13,9 @@ import { bindActionCreators } from 'redux';
 // LoginForm
 import LoginForm from '../components/LoginForm';
 
+//SignUpForm
+import SignUpForm from '../components/SignUpForm';
+
 // LoginActions
 import LoginActions from '../actions/LoginActions';
 
@@ -28,6 +31,9 @@ class AuthPage extends React.Component {
             isLoggedIn: props.user.isLoggedIn,
             isFacebookFetching: props.user.isFacebookFetching,
             email: props.user.email,
+
+            //signup form
+            isSigningUp: false,
         }
     }
 
@@ -38,21 +44,11 @@ class AuthPage extends React.Component {
         loginActions.getLogin();
     }
 
-    //handle user submission
-    //currently only checking to see if I can get value to pass from LoginForm
 
-    handleNewUser = (email) => {
-       if (email != "") {
-          //user.email = email;
-          //alert('new email' + email);
-         //var { loginActions } = this.props;
-         var loginInfo = {
-             email: email,
-             password: "yo",
-         }
-
-           this.props.loginActions.login(loginInfo); 
-       }
+    handleSignUpButtonPress = () => {
+        this.setState({
+            isSigningUp: true,
+        })
     }
 
     render() {
@@ -63,7 +59,7 @@ class AuthPage extends React.Component {
         return (
             <div className="auth">
                 <div className="login">
-                    <LoginForm loginFunction={loginActions.login} handleNewUser={this.handleNewUser} />
+                    <LoginForm loginFunction={loginActions.login}  />
                 </div>
                 Hello World!
 
@@ -71,6 +67,17 @@ class AuthPage extends React.Component {
                     ? 'User is logged in'
                     : 'User is not logged in'
                 }
+
+                <div className="signup">
+                    <button onClick={this.handleSignUpButtonPress}>
+                        New User Sign Up
+                    </button>
+
+                    { this.state.isSigningUp && 
+                        <SignUpForm />
+                    }
+
+                </div>
             </div>
         );
     }
