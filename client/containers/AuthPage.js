@@ -41,12 +41,17 @@ class AuthPage extends React.Component {
     //handle user submission
     //currently only checking to see if I can get value to pass from LoginForm
 
-    handleNewUser = (data) => {
-       if (data != "") {
+    handleNewUser = (email) => {
+       if (email != "") {
           //user.email = email;
           //alert('new email' + email);
          //var { loginActions } = this.props;
-         this.props.loginActions.login(data); 
+         var loginInfo = {
+             email: email,
+             password: "yo",
+         }
+
+           this.props.loginActions.login(loginInfo); 
        }
     }
 
