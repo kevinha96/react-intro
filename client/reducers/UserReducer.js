@@ -18,6 +18,8 @@ module.exports = function userReducer(state = initialState, action) {
             ...state,
             ...action,
         }
+        case types.LOGOUT_SUCCESSFUL:
+        return {initialState}
 
         default:
         return state;

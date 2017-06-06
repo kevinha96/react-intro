@@ -13,6 +13,7 @@ module.exports = {
     // URLs
     LOGIN: BASE_URL + 'login/',
     SIGNUP: BASE_URL + 'signup/',
+    LOGOUT: BASE_URL + 'logout/',
     GET_CONFIG: {
         method: 'GET',
         credentials: 'include',

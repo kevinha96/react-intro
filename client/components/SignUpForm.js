@@ -18,8 +18,8 @@ class SignUpForm extends React.Component {
     }
 
     submitForm = (event) => {
-        alert('submit form button working');
         this.props.signUpFunction(this.state);
+        this.props.cancelSignUp();
         event.preventDefault();
     }
 

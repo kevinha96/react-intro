@@ -25,6 +25,10 @@ class LoginForm extends React.Component {
         // Run this when the form gets submitted, prevent the default action
 
         this.props.loginFunction(this.state);
+        this.setState({
+            email: '',
+            password: '',
+        })
         event.preventDefault();
     }
 

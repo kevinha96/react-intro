@@ -12,15 +12,15 @@ import { bindActionCreators } from 'redux';
 
 // LoginForm
 import LoginForm from '../components/LoginForm';
-
 //SignUpForm
 import SignUpForm from '../components/SignUpForm';
 
 // LoginActions
 import LoginActions from '../actions/LoginActions';
-
 //SignUpActions
 import SignUpActions from '../actions/SignUpActions';
+//LogOutActions
+import LogOutActions from '../actions/LogOutActions';
 
 // Stylesheets .scss is like .css but it has built in scoping
 import '../stylesheets/containers/AuthPage.scss';
@@ -31,9 +31,6 @@ class AuthPage extends React.Component {
         super(props);
 
         this.state = {
-            isLoggedIn: props.user.isLoggedIn,
-            isFacebookFetching: props.user.isFacebookFetching,
-            email: props.user.email,
 
             //signup form
             isSigningUp: false,
@@ -43,7 +40,7 @@ class AuthPage extends React.Component {
     componentDidMount() {
         // If you want to do anything when this element first renders, do it here
         // See lifecycle methods: https://facebook.github.io/react/docs/react-component.html
-        var { loginActions, signUpActions } = this.props;
+        var { loginActions, signUpActions, logOutActions } = this.props;
         loginActions.getLogin();
     }
 
@@ -54,6 +51,16 @@ class AuthPage extends React.Component {
         })
     }
 
+    cancelSignUp = () => {
+        this.setState({
+            isSigningUp: false,
+        })
+    }
+
+    logOut = () => {
+        this.props.logOutActions.logOut();       
+    }
+
     render() {
         // This is where you place your HTML. Inside of here goes components and other HTML elements
 
@@ -62,25 +69,47 @@ class AuthPage extends React.Component {
         return (
             <div className="auth">
                 <div className="login">
-                    <LoginForm loginFunction={loginActions.login}  />
+                    Login:
+                    <LoginForm loginFunction={loginActions.login} /> <br />
                 </div>
-                Hello World!
-
-                { user.isLoggedin
-                    ? 'User is logged in'
-                    : 'User is not logged in'
-                }
-
+                
                 <div className="signup">
                     <button onClick={this.handleSignUpButtonPress}>
                         New User Sign Up
                     </button>
+                    
 
                     { this.state.isSigningUp && 
-                        <SignUpForm signUpFunction={signUpActions.signup} />
+                        <div className="signupform">
+                            <br /><SignUpForm signUpFunction={signUpActions.signup} cancelSignUp={this.cancelSignUp}/>
+                    
+                            <button onClick={this.cancelSignUp}>
+                                Cancel Sign Up
+                            </button>
+                        </div>
                     }
 
                 </div>
+
+                <br />
+
+                { user.isLoggedIn ? (
+                    <div clasName="loggedin">
+                        <div>
+                        User is logged in <br />
+                        Email: {user.email} <br />
+                        </div>
+                    
+                        <div className="logoutbutton">
+                            <button onClick={this.logOut}>
+                                Log Out
+                            </button>
+                        </div>
+                    </div>
+                    )
+                    : 'User is not logged in'
+                }
+
             </div>
         );
     }
@@ -100,6 +129,7 @@ function mapDispatchToProps(dispatch) {
     return {
         loginActions: bindActionCreators(LoginActions, dispatch),
         signUpActions: bindActionCreators(SignUpActions, dispatch),
+        logOutActions: bindActionCreators(LogOutActions, dispatch),
     }
 }
 
