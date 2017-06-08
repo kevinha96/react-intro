@@ -10,16 +10,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
+
 // LoginForm
 import LoginForm from '../components/LoginForm';
-//SignUpForm
+// SignUpForm
 import SignUpForm from '../components/SignUpForm';
 
 // LoginActions
 import LoginActions from '../actions/LoginActions';
-//SignUpActions
+// SignUpActions
 import SignUpActions from '../actions/SignUpActions';
-//LogOutActions
+// LogOutActions
 import LogOutActions from '../actions/LogOutActions';
 
 // Stylesheets .scss is like .css but it has built in scoping
@@ -67,32 +70,33 @@ class AuthPage extends React.Component {
         // this.props is a dictionary, so var { loginActions } is the same thing as var loginActions = this.props['loginActions'];
         var { user, loginActions, signUpActions } = this.props;
         return (
-            <div className="auth">
+            <div>    
+            <div className={css(styles.container)}>
                 <div className="login">
-                    Login:
+                    <span className={css(styles.login)}>
+                        Login Page
+                    </span>
                     <LoginForm loginFunction={loginActions.login} /> <br />
                 </div>
                 
                 <div className="signup">
-                    <button onClick={this.handleSignUpButtonPress}>
-                        New User Sign Up
+                <label className={css(styles.newAccountQ)} > Don't have an account? </label>
+                    <button onClick={this.handleSignUpButtonPress} className={css(styles.newUserButton)}>
+                        Sign Up
                     </button>
-                    
-
                     { this.state.isSigningUp && 
-                        <div className="signupform">
+                        <div className={css(styles.inLine)}>
+                            <button onClick={this.cancelSignUp} className={css(styles.newUserButton)}>
+                                Cancel
+                            </button>
                             <br /><SignUpForm signUpFunction={signUpActions.signup} cancelSignUp={this.cancelSignUp}/>
                     
-                            <button onClick={this.cancelSignUp}>
-                                Cancel Sign Up
-                            </button>
                         </div>
                     }
-
-                </div>
-
                 <br />
-
+                </div>
+                </div>
+                <div>
                 { user.isLoggedIn ? (
                     <div clasName="loggedin">
                         <div>
@@ -109,11 +113,45 @@ class AuthPage extends React.Component {
                     )
                     : 'User is not logged in'
                 }
-
+                </div>
             </div>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    login: {
+        font: '24px Verdana'
+    },
+    container: {
+        textAlign: 'center',
+        width: '450px',
+        margin: 'auto',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%);',
+        border: '1px solid gray',
+        borderRadius: '2px',
+    },
+    newAccountQ: {
+        font: '14px Lucida Grande',
+        height: '30px',
+        marginRight: '20px'
+    },
+    newUserButton: {
+        color: 'red',
+        height: '30px',
+        width: '70px',
+        marginRight: '20px',
+        border: '1px solid red',
+        borderRadius: '2px',
+        backgroundColor: 'white'
+    },
+    inLine: {
+        display: 'inline'
+    },
+});
 
 /*****************
  * REDUX SECTION *

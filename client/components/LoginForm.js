@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { StyleSheet, css } from 'aphrodite';
 
 class LoginForm extends React.Component {
 
@@ -59,19 +60,28 @@ class LoginForm extends React.Component {
         // This is where you place your HTML. Inside of here goes components and other HTML elements
         return (
             <form onSubmit={this.submitForm}>
-               <label>
-                   Email:
-                   <input type="text" value={this.state.email} onChange={this.handleEmailChange} /> 
-               </label>
-               <label>
-                   Password:
-                   <input type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-               </label>
-               <input type="submit" value="Submit" />
+                   <input type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder="Email Address" className={css(styles.loginTextArea)} /> 
+                   <br />
+                   <input type="text" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password" className={css(styles.loginTextArea)} />
+                   <br />
+               <input type="submit" value="Submit" className={css(styles.loginTextArea, styles.red)} />
 
             </form>
         );
     }
 }
 
+const styles = StyleSheet.create({
+    loginTextArea: {
+        height: '50px',
+        width: '400px',
+        marginTop: '10px',
+        borderRadius: '2px',
+        border: '1px solid gray'
+    },
+    red: {
+        backgroundColor: 'red',
+        color: 'white'
+    },
+});
 export default LoginForm;

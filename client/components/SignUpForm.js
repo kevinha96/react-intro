@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { StyleSheet, css } from 'aphrodite';
 
 class SignUpForm extends React.Component {
     
@@ -35,19 +36,29 @@ class SignUpForm extends React.Component {
         return(
             
             <form onSubmit={this.submitForm}>
-                <label>
-                    Email:
-                    <input type="text" value={this.state.email} onChange={this.handleEmailChange} />
-                </label>
-                <label>
-                    Password:
-                    <input type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-                </label>
-                <input type="submit" value="Sign Up" />
+                <input type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder="Email Address" className={css(styles.signupTextArea)}/>
+                <br />
+                <input type="text" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password" className={css(styles.signupTextArea)} />
+                <br />
+                <input type="submit" value="Sign Up" className={css(styles.signupTextArea, styles.red)} />
             </form>    
 
         );
     }
 }
+
+const styles = StyleSheet.create({
+    signupTextArea: {
+        height: '50px',
+        width: '400px',
+        marginTop: '10px',
+        borderRadius: '2px',
+        border: '1px solid gray'
+    },
+    red: {
+        backgroundColor: 'red',
+        color: 'white'
+    },
+});
 
 export default SignUpForm;
