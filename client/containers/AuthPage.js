@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import FacebookLogin from 'react-facebook-login';
 
 // Redux
 import { connect } from 'react-redux';
@@ -17,6 +18,8 @@ import { StyleSheet, css } from 'aphrodite';
 import LoginForm from '../components/LoginForm';
 // SignUpForm
 import SignUpForm from '../components/SignUpForm';
+//FacebookLoginForm
+import FacebookLoginForm from '../components/FacebookLoginForm';
 
 // LoginActions
 import LoginActions from '../actions/LoginActions';
@@ -24,6 +27,8 @@ import LoginActions from '../actions/LoginActions';
 import SignUpActions from '../actions/SignUpActions';
 // LogOutActions
 import LogOutActions from '../actions/LogOutActions';
+//FacebookLoginActions
+import FacebookLoginActions from '../actions/FacebookLoginActions';
 
 // Stylesheets .scss is like .css but it has built in scoping
 import '../stylesheets/containers/AuthPage.scss';
@@ -68,7 +73,7 @@ class AuthPage extends React.Component {
         // This is where you place your HTML. Inside of here goes components and other HTML elements
 
         // this.props is a dictionary, so var { loginActions } is the same thing as var loginActions = this.props['loginActions'];
-        var { user, loginActions, signUpActions } = this.props;
+        var { user, loginActions, signUpActions, facebookLoginActions } = this.props;
         return (
             <div>    
             <div className={css(styles.container)}>
@@ -76,6 +81,8 @@ class AuthPage extends React.Component {
                     <span className={css(styles.login)}>
                         Login Page
                     </span>
+                    <FacebookLoginForm loginFunction={facebookLoginActions.facebookLogin} />
+                    <div className={css(styles.or)}>or</div>
                     <LoginForm loginFunction={loginActions.login} /> <br />
                 </div>
                 
@@ -151,6 +158,13 @@ const styles = StyleSheet.create({
     inLine: {
         display: 'inline'
     },
+    or: {
+        font: '14px Lucida Grande',
+        color: 'black',
+        height: '34px',
+        padding: '8px'
+    },
+            
 });
 
 /*****************
@@ -168,6 +182,7 @@ function mapDispatchToProps(dispatch) {
         loginActions: bindActionCreators(LoginActions, dispatch),
         signUpActions: bindActionCreators(SignUpActions, dispatch),
         logOutActions: bindActionCreators(LogOutActions, dispatch),
+        facebookLoginActions: bindActionCreators(FacebookLoginActions, dispatch),
     }
 }
 

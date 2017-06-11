@@ -14,6 +14,8 @@ const initialState = {
 module.exports = function userReducer(state = initialState, action) {
     switch(action.type) {
         case types.LOGIN_SUCCESSFUL:
+        case types.FACEBOOK_LOGIN_REQUEST:
+        case types.FACEBOOK_LOGIN_SUCCESSFUL:
         return {
             ...state,
             ...action,
