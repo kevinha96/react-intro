@@ -29,10 +29,9 @@ module.exports = bookshelf.Model.extend({
         var facebookUser = new this(attrs);
         var newUser = facebookUser.save().then(user => {
             return new User({
-                default_nickname: attrs.first_name.toLowerCase() + '.' + attrs.last_name.toLowerCase(),
+                username: attrs.first_name.toLowerCase() + '.' + attrs.last_name.toLowerCase(),
                 email: attrs.email,
-                facebookUser_id: user.get('id'),
-                chat_id: chance.md5()
+                facebookUser_id: user.get('id')
             });
         }).then(newUser => {
             return newUser.save();

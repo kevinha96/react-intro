@@ -23,11 +23,10 @@ module.exports = {
         if (response.status >= 200 && response.status < 300) {
             return Promise.resolve(response);
         }
-        alert('check status error: ' + response.statusText);
+        console.log('check status error: ' + response.statusText);
         //response.jason().then((response) => {});
         const error = new Error(response.statusText);
         error.response = response;
-        //alert('error: ' + error);
         return Promise.reject(error);
     },
     /***

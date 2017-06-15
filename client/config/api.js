@@ -14,6 +14,7 @@ module.exports = {
     LOGIN: BASE_URL + 'login/',
     SIGNUP: BASE_URL + 'signup/',
     LOGOUT: BASE_URL + 'logout/',
+    FACEBOOK: BASE_URL + 'login/facebook/token/',
     GET_CONFIG: {
         method: 'GET',
         credentials: 'include',

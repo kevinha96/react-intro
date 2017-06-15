@@ -81,7 +81,7 @@ class AuthPage extends React.Component {
                     <span className={css(styles.login)}>
                         Login Page
                     </span>
-                    <FacebookLoginForm loginFunction={facebookLoginActions.facebookLogin} />
+                    <FacebookLoginForm loginFunction={facebookLoginActions.facebookLogin} user={user} />
                     <div className={css(styles.or)}>or</div>
                     <LoginForm loginFunction={loginActions.login} /> <br />
                 </div>
@@ -105,9 +105,10 @@ class AuthPage extends React.Component {
                 </div>
                 <div>
                 { user.isLoggedIn ? (
-                    <div clasName="loggedin">
+                    <div className="loggedin">
                         <div>
                         User is logged in <br />
+                        Username: {user.username} <br />
                         Email: {user.email} <br />
                         </div>
                     

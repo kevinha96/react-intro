@@ -7,7 +7,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import FacebookLogin from 'react-facebook-login';
-import { FACEBOOK_APP_ID } from '../config/settings';
 import { browserHistory } from 'react-router';
 
 class FacebookLoginForm extends React.Component {
@@ -17,7 +16,7 @@ class FacebookLoginForm extends React.Component {
 
         this.state = {
            //handle facebook error
-            facebookError: '', 
+            facebookError: false, 
         }
     }
     
@@ -29,45 +28,33 @@ class FacebookLoginForm extends React.Component {
     responseFacebook = (response) => {
         
         this.setState({
-            facebookError: '',
+            facebookError: false,
         });
-
-        alert('howdy');
-        /*this.props.loginFunction(response);
+        console.log(response);
+        this.props.loginFunction(response)
         .then((data) => {
             if (data.isLoggedIn) {
-                browserHistory.push('/');
+                //browserHistory.push('/');
             } else {
                 alert('this is not working');
                 this.setState({
                     facebookError: 'error signing up with facebook',
                 });
             }
-        });*/
+        });
     }
 
     render() {
         return(
-//           <button onClick={this.handleClick} className={css(styles.fbButton)} >
-//            Log in with Facebook
-//           </button>
             <div>
-                <FacebookLogin
-                appId={FACEBOOK_APP_ID}
+            <FacebookLogin
+                appId={1160840187372674}
                 language="en_US"
                 scope="public_profile, email, user_birthday"
                 auth_type="rerequest"
                 callback={this.responseFacebook}
                 version="v2.8"
-                
-            />
-            
-            {this.state.facebookError
-                ? <div>
-                {this.state.facebookError}
-                </div>
-                : null
-            }
+                /> 
             </div>
          );
     }

@@ -52,7 +52,8 @@ router.post('/login/facebook/token', function(req, res, next) {
         if (!user) { return res.status(400).json({error: 'Facebook login failed'}); }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
-            return res.status(200).json({message: 'successful login'});
+            console.log(user.serializeForSelf());
+            return res.status(200).json(Object.assign({message: 'successful login'}, user.serializeForSelf()));
         });
     })(req, res, next)
 });

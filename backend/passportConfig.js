@@ -32,12 +32,14 @@ passport.use(new FacebookTokenStrategy({
             FacebookUser.where({ 'facebook_id' : profile.id }).fetch().then(facebookUser => {
                 // if the user is found, then log them in
                 if (facebookUser) {
+                    console.log('found user with id: ' + facebookUser.get('id')); 
                     User.where({'facebookUser_id': facebookUser.get('id')}).fetch().then(user => {
+                        console.log('user is ' + JSON.stringify(user));
                         return done(null, user); // user found, return that user
                     });
                 } else {
                     // if there is no user found with that facebook id, create them
-
+                    console.log('no user');
                     var attrs = {
                         access_token: access_token,
                         facebook_id: profile.id,

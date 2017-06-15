@@ -22,6 +22,8 @@ function receiveFacebookLoginHelper(json) {
         type: types.FACEBOOK_LOGIN_SUCCESSFUL,
         isFacebookFetching: false,
         isLoggedIn: true,
+        username: json.username,
+        email: json.email
     }
 }
 
@@ -29,12 +31,13 @@ module.exports = {
     facebookLogin: function facebookLogin(facebook) {
         var data = {'access_token': facebook.accessToken}
         return dispatch => {
-            alert('action called');
             dispatch(requestFacebookLogin());
+            console.log('facebooklogin requested with data: ' + JSON.stringify(data));
             return fetch(API.FACEBOOK, API.POST_CONFIG(data))
             .then(Helpers.checkStatus)
+            .then(Helpers.parseJSON)
             .then((json) => {
-                return dispatch(receiveFacebookLoginHelper());
+                return dispatch(receiveFacebookLoginHelper(json));
             })
             .catch(error => {
                 //catch facebook signup error
